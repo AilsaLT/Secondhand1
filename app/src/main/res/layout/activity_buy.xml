@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ghl.wuhan.secondhand.find_activity.sell">
+    tools:context="com.ghl.wuhan.secondhand.find_activity.sale">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="60dp"
         android:background="#0895e7">
         <ImageView
             android:id="@+id/iv_back"
@@ -28,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"/>
         <Button
-            android:id="@+id/button_ti"
+            android:id="@+id/btn_submit"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:textSize="18sp"
@@ -42,117 +41,129 @@
     </RelativeLayout>
 
 
-
-
     <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
-        <TextView
-            android:id="@+id/text"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_showGoods"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="商品名称 ："
-            android:textSize="18sp"
-            android:textColor="#847b7b"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"/>
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_height="wrap_content">
+        </ListView>
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="分类："
-            android:textSize="18sp"
-            android:textColor="#847b7b"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"/>
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:spinnerMode="dropdown"
-            android:entries="@array/fenlei"/>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2">-->
+        <!--<TextView-->
+            <!--android:id="@+id/text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="商品名称 ："-->
+            <!--android:textSize="18sp"-->
+            <!--android:textColor="#847b7b"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="10dp"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/editText"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1">-->
+        <!--<TextView-->
+            <!--android:id="@+id/text4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="分类："-->
+            <!--android:textSize="18sp"-->
+            <!--android:textColor="#847b7b"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="10dp"/>-->
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:spinnerMode="dropdown"-->
+            <!--android:entries="@array/fenlei"/>-->
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/text2"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="联系方式："
-            android:textSize="18sp"
-            android:textColor="#847b7b"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"/>
-        <EditText
-            android:id="@+id/editText2"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1">-->
+        <!--<TextView-->
+            <!--android:id="@+id/text2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="联系方式："-->
+            <!--android:textSize="18sp"-->
+            <!--android:textColor="#847b7b"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="10dp"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/editText2"-->
+            <!--android:layout_width="250dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"/>-->
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/text3"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="描述："
-            android:textSize="18sp"
-            android:textColor="#847b7b"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="5dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"/>
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1">-->
+        <!--<TextView-->
+            <!--android:id="@+id/text3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="描述："-->
+            <!--android:textSize="18sp"-->
+            <!--android:textColor="#847b7b"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="10dp"/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/editText3"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="5">-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
 </LinearLayout>

@@ -27,7 +27,7 @@
         </activity>
         <activity android:name=".home_activity.search_activity">
         </activity>
-        <activity android:name=".find_activity.sell">
+        <activity android:name=".find_activity.sale">
         </activity>
         <activity android:name=".find_activity.buy">
         </activity>

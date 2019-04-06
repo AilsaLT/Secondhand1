@@ -13,14 +13,14 @@ import java.util.Arrays;
  * 版本：
  */
 
-public class UserBO_sell {
+public class SaleBO {
     private int opType;
     private String goodsID;//ID
     private String goodsType;//商品所属类
     private String goodsName;//商品名
-    private int price;// 价格
+    private float price;// 价格
     private String unit; //单位
-    private int quality;//数量
+    private float quality;//数量
     private String userid;//发布人ID
     private byte [] goodImg;//商品图片
     private String uname;
@@ -29,6 +29,7 @@ public class UserBO_sell {
     private String qq;
     private String weixin;
     private String token;
+    private String uid;
 
     public String getUid() {
         return uid;
@@ -38,7 +39,6 @@ public class UserBO_sell {
         this.uid = uid;
     }
 
-    private String uid;
 
     public int getOpType() {
         return opType;
@@ -72,11 +72,11 @@ public class UserBO_sell {
         this.goodsName = goodsName;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -88,11 +88,11 @@ public class UserBO_sell {
         this.unit = unit;
     }
 
-    public int getQuality() {
+    public float getQuality() {
         return quality;
     }
 
-    public void setQuality(int quality) {
+    public void setQuality(float quality) {
         this.quality = quality;
     }
 
@@ -162,7 +162,7 @@ public class UserBO_sell {
 
     @Override
     public String toString() {
-        return "UserBO_sell{" +
+        return "SaleBO{" +
                 "opType=" + opType +
                 ", goodsID='" + goodsID + '\'' +
                 ", goodsType='" + goodsType + '\'' +

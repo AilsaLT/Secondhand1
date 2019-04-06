@@ -20,7 +20,7 @@ import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 
-public class Fragment1 extends Fragment implements OnBannerListener {
+public class Home extends Fragment implements OnBannerListener {
     private String TAG = "tag";
     private Banner banner;
     private ArrayList<Integer> list_path;
@@ -32,7 +32,7 @@ public class Fragment1 extends Fragment implements OnBannerListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //  return super.onCreateView(inflater, container, savedInstanceState);
-        View view=inflater.inflate(R.layout.fragment_fragment1,container,false);
+        View view=inflater.inflate(R.layout.fragment_home,container,false);
         Banner banner = (Banner) view.findViewById(R.id.banner);
         ImageView image_back = (ImageView) view.findViewById(R.id.image_back);
 

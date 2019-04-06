@@ -8,14 +8,17 @@ import java.util.Arrays;
  */
 
 public class UserBO implements Serializable {
+
+    //登录中的参数
     private int opType;//操作类型
-    private String uid;
     private String uname;
     private String upassword;
+
+    private String token;
     private byte[] uimage;
     private int sex;
     private String uphone;
-    private String token;
+    private String uid;
 
     public String getToken() {
         return token;

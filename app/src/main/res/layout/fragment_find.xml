@@ -3,7 +3,7 @@
              android:orientation="vertical"
               android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.ghl.wuhan.secondhand.Fragment.Fragment3">
+             tools:context="com.ghl.wuhan.secondhand.Fragment.Find">
 
     <RelativeLayout
         android:id="@+id/headline"

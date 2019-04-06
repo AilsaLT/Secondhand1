@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import com.ghl.wuhan.secondhand.R;
 import com.ghl.wuhan.secondhand.find_activity.buy;
-import com.ghl.wuhan.secondhand.find_activity.sell;
+import com.ghl.wuhan.secondhand.find_activity.sale;
 
 
-public class Fragment3 extends Fragment {
+public class Find extends Fragment {
     private TextView tv_tan,tv_qiu;
     private ImageView image_ti;
 //    private int flag =0;
@@ -26,7 +26,7 @@ public class Fragment3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //  return super.onCreateView(inflater, container, savedInstanceState);
-        View view=inflater.inflate(R.layout.fragment_fragment3,container,false);
+        View view=inflater.inflate(R.layout.fragment_find,container,false);
         return view;
 
     }
@@ -52,7 +52,7 @@ public class Fragment3 extends Fragment {
                 image_ti.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent =new Intent(getActivity(),sell.class);
+                        Intent intent =new Intent(getActivity(),sale.class);
                         startActivity(intent);
                     }
                 });
@@ -63,7 +63,7 @@ public class Fragment3 extends Fragment {
         image_ti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getActivity(),sell.class);
+                Intent intent =new Intent(getActivity(),sale.class);
                 startActivity(intent);
             }
         });

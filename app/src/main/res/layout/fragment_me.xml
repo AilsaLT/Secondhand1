@@ -3,7 +3,7 @@
               android:orientation="vertical"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.ghl.wuhan.secondhand.Fragment.Fragment4">
+             tools:context="com.ghl.wuhan.secondhand.Fragment.Me">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,13 +32,13 @@
        <ImageView
            android:id="@+id/iv_deng"
            android:clickable="true"
-           android:layout_width="50dp"
-           android:layout_height="50dp"
+           android:layout_width="65dp"
+           android:layout_height="65dp"
            android:layout_alignParentLeft="true"
            android:layout_marginLeft="40dp"
            android:layout_centerHorizontal="true"
            android:layout_centerVertical="true"
-           android:background="@drawable/t1"/>
+           android:background="@drawable/denglu"/>
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"

@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -35,8 +37,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class sell extends TakePhotoActivity {
-private ImageView iv_back;
+public class sale extends TakePhotoActivity {
+
+    //属性定义部分
+    private ImageView iv_back;
     //打印日志
     private String TAG = "TAG";
     //拍照
@@ -49,51 +53,75 @@ private ImageView iv_back;
     private String goodsID;//ID
     private String goodsType;//商品所属类
     private String goodsName;//商品名
-    private int price;// 价格
-    private String unit; //单位
-    private int quality;//数量
+    private float price = 0.1f;// 价格
+    private String unit = "台"; //单位
+    private float quality = 1.0f;//数量
     private String userid;//发布人ID
-    private byte [] goodImg;//商品图片
-    private String uname;
-    private String uphone;
-    private int sex;
-    private String qq;
-    private String weixin;
+    private byte[] goodsImg;//商品图片
+    private String uname = "lt";
+    private String uphone = "15827630494";
+    private int sex = 0;
+    private String qq = "2926509946";
+    private String weixin = "000";
     private String token;
     private Button btn_submit;
-    private EditText et_goodsName,et_price;
+    private EditText et_goodsName, et_price;
+
+    //获取商品类型
+    private Spinner getGoodsType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /**************************拍照部分**************************/
+
+        //这两句必须放在super.onCreate(savedInstanceState);之后， setContentView(contentView);之前
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
         View contentView = LayoutInflater.from(this).inflate(R.layout.activity_user_register, null);
-        /******************************拍照部分******************************/
-        //这两句必须放在super.onCreate(savedInstanceState);之后， setContentView(contentView);之前
-        setContentView(R.layout.activity_sell);
 
-        iv_back=(ImageView)findViewById(R.id.iv_back);
+        setContentView(R.layout.activity_sale);
+
+
+
+
+
+        //初始化
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         image_touxiang = (ImageView) findViewById(R.id.image_touxiang);
         btn_submit = (Button) findViewById(R.id.btn_submit);
         et_goodsName = (EditText) findViewById(R.id.et_goodsName);
-        et_price = (EditText)findViewById(R.id.et_price);
+        et_price = (EditText) findViewById(R.id.et_price);
+        getGoodsType = (Spinner) findViewById(R.id.goods_Type);
+
+        host = getResources().getString(R.string.host);
+        customHelper = CustomHelper.of(contentView);
+
+        //spanner
+        getGoodsType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                goodsType = (String) getGoodsType.getSelectedItem();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
-
+        //取消发布商品
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        /***********************************以下为拍照部分*****************************************************************/
-        host = getResources().getString(R.string.host);
-        customHelper = CustomHelper.of(contentView);
 
+        //点击拍照或选择照片
         image_touxiang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Dialogchoosephoto(sell.this) {
+                new Dialogchoosephoto(sale.this) {
                     @Override
                     public void btnPickByTake() {
                         ChooseImage = true;
@@ -110,8 +138,8 @@ private ImageView iv_back;
                 }.show();
             }
         });
-        /*******************************************以上为拍照部分***************************/
 
+        //点击发布商品
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,26 +149,31 @@ private ImageView iv_back;
                     public void run() {
                         //获取用户名和密码参数
                         String goodsName = et_goodsName.getText().toString().trim();//trim()的作用是去掉字符串左右的空格
-                       int price = Integer.parseInt(et_price.getText().toString());
+                        float price = Float.parseFloat(et_price.getText().toString());
+                        Log.i(TAG, "成功获取goodsName==" + goodsName);
+                        Log.i(TAG, "成功获取price==" + price);
+                        //将存储在sp中的token拿到
+                        SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
+                        String token = pref.getString("token", "");
+                        String uname = pref.getString("uname", "");
+                        userid = uname;
+                        Log.i(TAG, "成功获取token==" + token);
+                        Log.i(TAG, "成功获取uname==" + uname);
 
-
-                        SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
-                        String token = pref.getString("token","");
-                        Log.i(TAG,"成功获取token=="+token);
-
-                        register(opType,goodsID,goodsType, goodsName,price,unit,quality,userid,goodImg,uname,uphone,sex,qq,weixin,token);
+                        sale(opType, goodsID, goodsType, goodsName, price, unit, quality, userid, goodsImg, uname, uphone, sex, qq, weixin, token);
                     }
                 }).start();
             }
         });
     }
-            //将传入的参数转换成Json串使用
-    private void register(int opType,String goodsID,String goodsType, String goodsName,int price,
-                          String unit,int quality,String userid,
-                          byte[]goodImg,String uname,String uphone,
-                          int sex,String qq,String weixin,String token) {
 
-        UserBO_sell userBO = new UserBO_sell();
+    //将传入的参数转换成Json串使用
+    private void sale(int opType, String goodsID, String goodsType, String goodsName, float price,
+                          String unit, float quality, String userid,
+                          byte[] goodImg, String uname, String uphone,
+                          int sex, String qq, String weixin, String token) {
+
+        SaleBO userBO = new SaleBO();
         String uuid = UUID.randomUUID().toString();
         userBO.setUid(uuid);
         userBO.setOpType(opType);
@@ -160,34 +193,29 @@ private ImageView iv_back;
 
 
         Gson gson = new Gson();
-        String userJsonStr = gson.toJson(userBO, UserBO_sell.class);
+        String userJsonStr = gson.toJson(userBO, SaleBO.class);
         Log.i(TAG, "jsonStr is :" + userJsonStr);
-
-
-        //            String url = "http://192.168.2.114:8081/Proj20/register";
         String url = "http://118.89.217.225:8080/Proj20/sale";
         sendRequest(url, userJsonStr);
 
     }
 
-
+    //发送http请求
     public void sendRequest(String url, String jsonStr) {
 
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
-        Log.i(TAG,"成功创建OkHttpClient对象.......");
-        //            MediaType JSON = MediaType.parse("application/json; charset=utf-8");//数据类型为json格式，
+        Log.i(TAG, "成功创建OkHttpClient对象.......");
         RequestBody requestBody = new FormBody.Builder()
-                .add("reqJson",jsonStr)
+                .add("reqJson", jsonStr)
                 .build();
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
                 .build();
-//        Log.i(TAG,"body对象成功传入.....");
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d(TAG,"获取数据失败了"+e.toString());
+                Log.d(TAG, "获取数据失败了" + e.toString());
             }
 
             @Override
@@ -202,26 +230,36 @@ private ImageView iv_back;
                     //将response.code()转换成对象
                     UserVO userVO = new UserVO();
                     Gson gson = new Gson();
-                    userVO = gson.fromJson(s,UserVO.class);
-                    int flag =userVO.getFlag();
-                    if(flag == 200){
-                        Intent intent = new Intent(sell.this,user_login.class);
-                        startActivity(intent);
+                    userVO = gson.fromJson(s, UserVO.class);
+                    int flag = userVO.getFlag();
 
+                    if (flag == 200) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(sale.this, "商品发布成功！", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Intent intent = new Intent(sale.this, user_login.class);
+                        startActivity(intent);
+                    }
+                    if (flag == 40001) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(sale.this, "照片过大，商品发布失败！", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                    if (flag == 40003) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(sale.this, "SALE_GOODS_FAILED_PARAMS", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
-
-
-
-
-
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(sell.this, s, Toast.LENGTH_SHORT).show();
-                        }
-                    });
 
 
                 }
@@ -229,7 +267,6 @@ private ImageView iv_back;
         });//此处省略回调方法
 
     }
-
 
     @Override
     public void takeCancel() {
@@ -257,7 +294,5 @@ private ImageView iv_back;
 
 
     }
-
-    /***********************************************使用okhttp实现的销售商品**************************************************/
 
 }

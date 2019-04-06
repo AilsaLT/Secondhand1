@@ -11,7 +11,7 @@ package com.ghl.wuhan.secondhand.find_activity;
  * 版本：
  */
 
-public class UserVO_buy {
+public class SaleVO {
     private String token;//token
     private String opType;//操作类型（发布，维护等）
 
@@ -33,7 +33,7 @@ public class UserVO_buy {
 
     @Override
     public String toString() {
-        return "UserVO_buy{" +
+        return "SaleVO{" +
                 "token='" + token + '\'' +
                 ", opType='" + opType + '\'' +
                 '}';

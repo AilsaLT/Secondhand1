@@ -13,7 +13,7 @@ import com.ghl.wuhan.secondhand.R;
 import com.ghl.wuhan.secondhand.sort_activity.sort_classify_activity;
 
 
-public class Fragment2 extends Fragment {
+public class Sort extends Fragment {
 
     private RelativeLayout rl_mobile;
     private RelativeLayout rl_clothes;
@@ -26,7 +26,7 @@ public class Fragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //  return super.onCreateView(inflater, container, savedInstanceState);
-        View view=inflater.inflate(R.layout.fragment_fragment2,container,false);
+        View view=inflater.inflate(R.layout.fragment_sort,container,false);
         return view;
     }
 
@@ -34,7 +34,7 @@ public class Fragment2 extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        //初始化
         rl_mobile = getView().findViewById(R.id.rl_mobile);
         rl_mobile.setOnClickListener(new View.OnClickListener() {
             @Override

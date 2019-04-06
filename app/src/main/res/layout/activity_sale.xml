@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ghl.wuhan.secondhand.find_activity.sell">
+    tools:context="com.ghl.wuhan.secondhand.find_activity.sale">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -123,7 +123,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"/>
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/goods_Type"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"

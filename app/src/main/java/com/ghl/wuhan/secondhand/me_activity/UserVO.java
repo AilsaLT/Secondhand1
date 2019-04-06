@@ -12,7 +12,7 @@ package com.ghl.wuhan.secondhand.me_activity;
  */
 
 public class UserVO {
-    private int flag;
+    private int flag;//标志符
 
     public int getFlag() {
         return flag;
