@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -27,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -39,10 +39,11 @@ public class user_register extends TakePhotoActivity {
    //属性定义
     private RelativeLayout rl_back;
     private String TAG = "TAG";
-    private ImageView iv_tou;
+//    private ImageView iv_tou;
     private String host;
     private boolean ChooseImage = false;
     private CustomHelper customHelper;
+    private CircleImageView icon_image;
 
     //向后台提交用户名和密码
 //    private TextView responseText;
@@ -72,7 +73,8 @@ public class user_register extends TakePhotoActivity {
         et_password = (EditText) findViewById(R.id.et_password);
 //        et_qr = (EditText) findViewById(R.id.et_qr);
         btn_register = (Button) findViewById(R.id.btn_register);
-        iv_tou = findViewById(R.id.iv_tou);
+//        iv_tou = (ImageView) findViewById(R.id.iv_tou);
+        icon_image = (CircleImageView)findViewById(R.id.icon_image);
 
         Log.i(TAG, "************onCreate init********");
 
@@ -118,7 +120,7 @@ public class user_register extends TakePhotoActivity {
         host = getResources().getString(R.string.host);
         customHelper = CustomHelper.of(contentView);
 
-        iv_tou.setOnClickListener(new View.OnClickListener() {
+        icon_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Dialogchoosephoto(user_register.this) {
@@ -154,11 +156,11 @@ public class user_register extends TakePhotoActivity {
         Log.i(TAG, "RegisterActivity : takeSuccess");
         super.takeSuccess(result);
         for (int i = 0, j = result.getImages().size(); i < j - 1; i += 2) {
-            Glide.with(this).load(new File(result.getImages().get(i).getCompressPath())).into(iv_tou);
-            Glide.with(this).load(new File(result.getImages().get(i + 1).getCompressPath())).into(iv_tou);
+            Glide.with(this).load(new File(result.getImages().get(i).getCompressPath())).into(icon_image);
+            Glide.with(this).load(new File(result.getImages().get(i + 1).getCompressPath())).into(icon_image);
         }
         if (result.getImages().size() % 2 == 1) {
-            Glide.with(this).load(new File(result.getImages().get(result.getImages().size() - 1).getCompressPath())).into(iv_tou);
+            Glide.with(this).load(new File(result.getImages().get(result.getImages().size() - 1).getCompressPath())).into(icon_image);
         }
 
 

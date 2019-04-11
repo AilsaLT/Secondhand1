@@ -2,13 +2,14 @@ package com.ghl.wuhan.secondhand.find_activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.ghl.wuhan.secondhand.R;
 import com.google.gson.Gson;
@@ -32,9 +33,12 @@ public class buy extends AppCompatActivity {
     private Button btn_submit;
     private String token;
     private int opType = 90004;
+    private SwipeRefreshLayout swipeRefresh;
+
 
     //查询列表中的属性
-    ListView lv_showGoods;
+//    ListView lv_showGoods;
+    RecyclerView recyclerView;
     List<Goods> resultGoodsList = new ArrayList<Goods>();
 
     @Override
@@ -43,7 +47,10 @@ public class buy extends AppCompatActivity {
         setContentView(R.layout.activity_buy);
 
         //初始化部分
-        lv_showGoods = (ListView) findViewById(R.id.lv_showGoods);
+//        lv_showGoods = (ListView) findViewById(R.id.lv_showGoods);
+            recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
+        //下拉刷新
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 
         iv_back = (ImageView) findViewById(R.id.iv_back);
         btn_submit = (Button) findViewById(R.id.btn_submit);
@@ -65,15 +72,46 @@ public class buy extends AppCompatActivity {
                     public void run() {
                         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
                         String token = preferences.getString("token", "");
-                        Log.i(TAG, "从sp获取到的token" + token);
+                        Log.i(TAG, "从sp获取到的token==" + token);
                         purchase(token, opType);
                     }
                 }).start();
             }
         });
+        //下拉刷新
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreFruit();
+            }
+        });
 
     }
+    private void refreFruit() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(buy.this);
+                        recyclerView.setLayoutManager(layoutManager);
+                        Goods_Adapter adapter = new Goods_Adapter(resultGoodsList);
+                        recyclerView.setAdapter(adapter);
+
+                        adapter.notifyDataSetChanged();
+                        swipeRefresh.setRefreshing(false);
+                    }
+                });
+            }
+        }).start();
+    }
     //将对象转换成json串
     private void purchase(String token, int opType) {
         Goods goods = new Goods();
@@ -131,8 +169,15 @@ public class buy extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (flag == 200) {
-                                ArrayAdapter<Goods> adapter = new GoodsAdapter(buy.this, R.layout.goods_item, resultGoodsList);
-                                lv_showGoods.setAdapter(adapter);
+//                                ArrayAdapter<Goods> adapter = new GoodsAdapter(buy.this, R.layout.goods_item, resultGoodsList);
+//                                lv_showGoods.setAdapter(adapter);
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(buy.this);
+                                recyclerView.setLayoutManager(layoutManager);
+                                Goods_Adapter adapter = new Goods_Adapter(resultGoodsList);
+                                recyclerView.setAdapter(adapter);
+
+                                adapter.notifyDataSetChanged();
+                                swipeRefresh.setRefreshing(false);
                             }
                         }
                     });

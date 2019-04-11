@@ -58,17 +58,17 @@ public class user_login extends AppCompatActivity {
         iv_back = (ImageView) findViewById(R.id.iv_back);
         et_uname = (EditText) findViewById(R.id.et_uname);
         et_password = (EditText) findViewById(R.id.et_password);
-
-        //记住密码
-        boolean isRemember = pref.getBoolean("remember_password",false);
-        if(isRemember) {
-            //将账号和密码都设置到文本框中
-            String uname = pref.getString("uname","");
-            String upassword = pref.getString("upassword","");
-            et_uname.setText(uname);
-            et_password.setText(upassword);
-            rememberPass.setChecked(true);
-        }
+//
+//        //记住密码
+//        boolean isRemember = pref.getBoolean("remember_password",false);
+//        if(isRemember) {
+//            //将账号和密码都设置到文本框中
+//            String uname = pref.getString("uname","");
+//            String upassword = pref.getString("upassword","");
+//            et_uname.setText(uname);
+//            et_password.setText(upassword);
+////            rememberPass.setChecked(true);
+//        }
         //注册
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,15 +191,15 @@ public class user_login extends AppCompatActivity {
 
                     }
 
-                    //记住密码
-                    if(rememberPass.isChecked()){//检查复选框是否被选中
-                        editor.putBoolean("remember_password",true);
-                        editor.putString("uname",uname);
-                        editor.putString("upassword",upassword);
-                    }else{
-                        editor.clear();
-                    }
-                    editor.commit();
+//                    //记住密码
+//                    if(rememberPass.isChecked()){//检查复选框是否被选中
+//                        editor.putBoolean("remember_password",true);
+//                        editor.putString("uname",uname);
+//                        editor.putString("upassword",upassword);
+//                    }else{
+//                        editor.clear();
+//                    }
+//                    editor.commit();
                     
                     if (flag == 20001) {
                         runOnUiThread(new Runnable() {

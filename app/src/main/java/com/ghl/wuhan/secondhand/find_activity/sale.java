@@ -251,7 +251,7 @@ public class sale extends TakePhotoActivity {
                             }
                         });
                     }
-                    if (flag == 40003) {
+                    if (flag == 4000) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
