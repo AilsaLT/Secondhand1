@@ -49,14 +49,21 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:background="#0b9ff5">
-
-        <ImageView
-            android:id="@+id/iv_tou"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:src="@drawable/yonghu1"
             android:layout_centerInParent="true"
-            android:background="@drawable/yonghu1"
             android:clickable="true"/>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_tou"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:background="@drawable/yonghu1"-->
+            <!--android:clickable="true"/>-->
 
     </RelativeLayout>
 
@@ -90,6 +97,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
             android:hint="请输入密码"
+            android:digits="@string/filterPwd"
             android:textSize="15dp"/>
 
 
@@ -108,6 +116,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
             android:hint="请确认密码"
+            android:digits="@string/filterPwd"
             android:textSize="15dp"/>
 
 

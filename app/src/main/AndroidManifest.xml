@@ -39,8 +39,6 @@
         </activity>
         <activity android:name=".sort_activity.sort_classify_activity">
         </activity>
-        <activity android:name=".me_activity.CircleImageView">
-        </activity>
         <activity android:name=".MainActivity">
         </activity>
     </application>

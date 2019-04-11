@@ -1,15 +1,18 @@
 package com.ghl.wuhan.secondhand.find_activity;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 
+import com.ghl.wuhan.secondhand.DialogUIUtils;
+import com.ghl.wuhan.secondhand.HttpUtil;
 import com.ghl.wuhan.secondhand.R;
 import com.google.gson.Gson;
 
@@ -18,12 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.ghl.wuhan.secondhand.DialogUIUtils.dismiss;
 
 public class buy extends AppCompatActivity {
    //属性定义
@@ -32,9 +32,13 @@ public class buy extends AppCompatActivity {
     private Button btn_submit;
     private String token;
     private int opType = 90004;
+    private Dialog progressDialog;
+
+
 
     //查询列表中的属性
-    ListView lv_showGoods;
+//    ListView lv_showGoods;
+    RecyclerView recyclerView;
     List<Goods> resultGoodsList = new ArrayList<Goods>();
 
     @Override
@@ -43,7 +47,9 @@ public class buy extends AppCompatActivity {
         setContentView(R.layout.activity_buy);
 
         //初始化部分
-        lv_showGoods = (ListView) findViewById(R.id.lv_showGoods);
+//        lv_showGoods = (ListView) findViewById(R.id.lv_showGoods);
+            recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
+
 
         iv_back = (ImageView) findViewById(R.id.iv_back);
         btn_submit = (Button) findViewById(R.id.btn_submit);
@@ -60,17 +66,27 @@ public class buy extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //设置进度条
+                progressDialog = DialogUIUtils.showLoadingDialog(buy.this,"正在查询中，请耐心等待......");
+                progressDialog.show();
+                //点击物理返回键是否可取消dialog
+                progressDialog.setCancelable(true);
+                //点击dialog之外 是否可取消
+                progressDialog.setCanceledOnTouchOutside(false);
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
                         String token = preferences.getString("token", "");
-                        Log.i(TAG, "从sp获取到的token" + token);
+                        Log.i(TAG, "从sp获取到的token==" + token);
                         purchase(token, opType);
                     }
                 }).start();
             }
         });
+
+
 
     }
 
@@ -85,23 +101,8 @@ public class buy extends AppCompatActivity {
         String buyJsonStr = gson.toJson(goods, Goods.class);
         Log.i(TAG, "查询商品中buyJsonStr is :" + buyJsonStr);
         String url = "http://118.89.217.225:8080/Proj20/buy";
-        sendRequest(url, buyJsonStr);
-
-
-    }
-
-    //发送http请求
-    private void sendRequest(String url, String JsonStr) {
-
-        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
-        RequestBody requestBody = new FormBody.Builder()
-                .add("reqJson", JsonStr)
-                .build();
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
+//        sendRequest(url, buyJsonStr);
+        HttpUtil.sendOkHttpRequest(url,buyJsonStr, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d(TAG, "获取数据失败了" + e.toString());
@@ -131,14 +132,23 @@ public class buy extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (flag == 200) {
-                                ArrayAdapter<Goods> adapter = new GoodsAdapter(buy.this, R.layout.goods_item, resultGoodsList);
-                                lv_showGoods.setAdapter(adapter);
+                                //                                ArrayAdapter<Goods> adapter = new GoodsAdapter(buy.this, R.layout.goods_item, resultGoodsList);
+                                //                                lv_showGoods.setAdapter(adapter);
+
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(buy.this);
+                                recyclerView.setLayoutManager(layoutManager);
+                                Goods_Adapter adapter = new Goods_Adapter(resultGoodsList);
+                                recyclerView.setAdapter(adapter);
+                                dismiss(progressDialog);
+
                             }
                         }
                     });
                 }
             }
-        });//此处省略回调方法
+        });
+
 
     }
+
 }

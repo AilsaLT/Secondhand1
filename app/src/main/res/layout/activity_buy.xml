@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.ghl.wuhan.secondhand.find_activity.sale">
     <RelativeLayout
@@ -41,19 +42,24 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
-
+        <!--<ListView-->
+            <!--android:id="@+id/lv_showGoods"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</ListView>-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/lv_showGoods"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ListView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-    </RelativeLayout>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <!--<RelativeLayout-->
         <!--android:layout_width="match_parent"-->

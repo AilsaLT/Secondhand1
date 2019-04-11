@@ -10,4 +10,7 @@
     <string name="title_activity_sort_jump_activity">sort_jump_activity</string>
     <string name="host" translatable="false">192.168.0.115:8080</string>
     <string name="title_activity__welcome">activity_Welcome</string>
+
+    <!--EditText限制输入格式为字母和数字-->
+    <string name="filterPwd">0123456789zxcvbnmasdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIOP</string>
 </resources>

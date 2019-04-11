@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.ghl.wuhan.secondhand.HttpUtil;
 import com.ghl.wuhan.secondhand.R;
 import com.ghl.wuhan.secondhand.me_activity.CustomHelper;
 import com.ghl.wuhan.secondhand.me_activity.Dialogchoosephoto;
@@ -30,11 +31,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class sale extends TakePhotoActivity {
@@ -196,23 +192,8 @@ public class sale extends TakePhotoActivity {
         String userJsonStr = gson.toJson(userBO, SaleBO.class);
         Log.i(TAG, "jsonStr is :" + userJsonStr);
         String url = "http://118.89.217.225:8080/Proj20/sale";
-        sendRequest(url, userJsonStr);
-
-    }
-
-    //发送http请求
-    public void sendRequest(String url, String jsonStr) {
-
-        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
-        Log.i(TAG, "成功创建OkHttpClient对象.......");
-        RequestBody requestBody = new FormBody.Builder()
-                .add("reqJson", jsonStr)
-                .build();
-        Request request = new Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
+//        sendRequest(url, userJsonStr);
+        HttpUtil.sendOkHttpRequest(url,userJsonStr, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d(TAG, "获取数据失败了" + e.toString());
@@ -251,7 +232,7 @@ public class sale extends TakePhotoActivity {
                             }
                         });
                     }
-                    if (flag == 40003) {
+                    if (flag == 4000) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -261,12 +242,14 @@ public class sale extends TakePhotoActivity {
                     }
 
 
-
                 }
             }
-        });//此处省略回调方法
+        });
+
 
     }
+
+
 
     @Override
     public void takeCancel() {
