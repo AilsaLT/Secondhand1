@@ -40,7 +40,11 @@ public class user_register extends TakePhotoActivity {
     //属性定义
     private RelativeLayout rl_back;
     private String TAG = "TAG";
+<<<<<<< HEAD
     //    private ImageView iv_tou;
+=======
+//    private ImageView iv_tou;
+>>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
     private String host;
     private boolean ChooseImage = false;
     private CustomHelper customHelper;
@@ -75,8 +79,13 @@ public class user_register extends TakePhotoActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         et_qr = (EditText) findViewById(R.id.et_qr);
         btn_register = (Button) findViewById(R.id.btn_register);
+<<<<<<< HEAD
         //        iv_tou = (ImageView) findViewById(R.id.iv_tou);
         icon_image = (CircleImageView) findViewById(R.id.icon_image);
+=======
+//        iv_tou = (ImageView) findViewById(R.id.iv_tou);
+        icon_image = (CircleImageView)findViewById(R.id.icon_image);
+>>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
 
         Log.i(TAG, "************onCreate init********");
 
