@@ -1,5 +1,6 @@
 package com.ghl.wuhan.secondhand;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     //初始化fragment和fragment数组
     private void initFragment() {
 
+        Intent intent = getIntent();
+        String extra = intent.getStringExtra("extra");
+        Bundle bundle = new Bundle();
+        bundle.putString("extra",extra);
+
         home = new Home();
         sort = new Sort();
         find = new Find();
@@ -66,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(changeFragment);
+
+        me.setArguments(bundle);
     }
 
     //判断选择的菜单
