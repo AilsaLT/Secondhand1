@@ -2,10 +2,10 @@ package com.ghl.wuhan.secondhand.me_activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,15 +40,17 @@ public class user_register extends TakePhotoActivity {
     //属性定义
     private RelativeLayout rl_back;
     private String TAG = "TAG";
-<<<<<<< HEAD
+
     //    private ImageView iv_tou;
-=======
+
 //    private ImageView iv_tou;
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
     private String host;
     private boolean ChooseImage = false;
     private CustomHelper customHelper;
     private CircleImageView icon_image;
+
+    private SharedPreferences.Editor editor;
 
     //向后台提交用户名和密码
     //    private TextView responseText;
@@ -79,13 +81,9 @@ public class user_register extends TakePhotoActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         et_qr = (EditText) findViewById(R.id.et_qr);
         btn_register = (Button) findViewById(R.id.btn_register);
-<<<<<<< HEAD
-        //        iv_tou = (ImageView) findViewById(R.id.iv_tou);
-        icon_image = (CircleImageView) findViewById(R.id.icon_image);
-=======
-//        iv_tou = (ImageView) findViewById(R.id.iv_tou);
+
         icon_image = (CircleImageView)findViewById(R.id.icon_image);
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
 
         Log.i(TAG, "************onCreate init********");
 
@@ -189,12 +187,12 @@ public class user_register extends TakePhotoActivity {
             Glide.with(this).load(new File(result.getImages().get(result.getImages().size() - 1).getCompressPath())).into(icon_image);
         }
 
-        //获取照片的路径
-        File path = new File(getExternalCacheDir(),"picture.jpg");
-        Log.i(TAG,"照片的路径为："+path);
-        //将路经转换成Uri
-        Uri imageUri = Uri.fromFile(path);
-        Log.i(TAG,"照片的Uri为："+imageUri);
+//        //获取照片的路径
+//        File path = new File(getExternalCacheDir(),"picture.jpg");
+//        Log.i(TAG,"照片的路径为："+path);
+//        //将路经转换成Uri
+//        Uri imageUri = Uri.fromFile(path);
+//        Log.i(TAG,"照片的Uri为："+imageUri);
         //打印的结果：照片的路径为：
         // /storage/emulated/0/Android/data/com.ghl.wuhan.secondhand/cache/picture.jpg
         //照片的Uri为：

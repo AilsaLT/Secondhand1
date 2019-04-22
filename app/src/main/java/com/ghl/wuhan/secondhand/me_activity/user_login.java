@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -45,12 +44,14 @@ public class user_login extends AppCompatActivity {
     private Dialog progressDialog;//进度条
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login);
 
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
+//        pref = PreferenceManager.getDefaultSharedPreferences(this);
+            pref = getSharedPreferences("data",MODE_PRIVATE);
         rememberPass = (CheckBox) findViewById(R.id.remember_pass);
 
         //初始化
@@ -61,22 +62,19 @@ public class user_login extends AppCompatActivity {
         iv_back = (ImageView) findViewById(R.id.iv_back);
         et_uname = (EditText) findViewById(R.id.et_uname);
         et_password = (EditText) findViewById(R.id.et_password);
-<<<<<<< HEAD
 
 
-=======
-//
-//        //记住密码
-//        boolean isRemember = pref.getBoolean("remember_password",false);
-//        if(isRemember) {
-//            //将账号和密码都设置到文本框中
-//            String uname = pref.getString("uname","");
-//            String upassword = pref.getString("upassword","");
-//            et_uname.setText(uname);
-//            et_password.setText(upassword);
-////            rememberPass.setChecked(true);
-//        }
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+        boolean isRemember = pref.getBoolean("remember_password",false);
+        if(isRemember) {
+            //将账号和密码都设置到文本框中
+            String account = pref.getString("account","");
+            Log.i(TAG,"账号为："+account);
+            String password = pref.getString("password","");
+            Log.i(TAG,"密码为："+password);
+            et_uname.setText(account);
+            et_password.setText(password);
+            rememberPass.setChecked(true);
+        }
         //注册
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +101,7 @@ public class user_login extends AppCompatActivity {
                 final String uname = et_uname.getText().toString().trim();//trim()的作用是去掉字符串左右的空格
                 String upassword = et_password.getText().toString().trim();
 
+
                 Log.i(TAG, "uname is :" + uname);
                 Log.i(TAG, "upassword is :" + upassword);
 
@@ -116,7 +115,21 @@ public class user_login extends AppCompatActivity {
                     //设置进度条
                     progressDialog = DialogUIUtils.showLoadingDialog(user_login.this,"正在登录......");
                     progressDialog.show();
+                    //如果选中了记住密码，则把用户名密码保存
+                    editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                    if (rememberPass.isChecked()) {
+                        Log.i("TAG", "开始保存密码");
+                        editor.putString("account", uname);
+                        editor.putString("password", upassword);
+                        editor.putBoolean("remember_password", true);
+                    } else {
+                        editor.clear();
+                    }
+                    editor.commit();
+
                     login(opType, uname, upassword.toString());
+
+
                 }
 
 
@@ -135,7 +148,7 @@ public class user_login extends AppCompatActivity {
     }
 
     //将对象转换成json串
-    private void login(int opType, String uname, String upassword) {
+    private void login(int opType, final String uname, final String upassword) {
 
         UserBO userBO = new UserBO();
         String uuid = UUID.randomUUID().toString();
@@ -181,49 +194,32 @@ public class user_login extends AppCompatActivity {
                     int flag = userVO.getFlag();
                     Log.i(TAG, "登录中成功获取flag==" + flag);
                     //flag=200登录成功，将token进行存储
-                    String uname = et_uname.getText().toString();
-                    String upassword = et_password.getText().toString();
-//
-                    //如果选中了记住密码，则把用户名密码保存
-                   editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                    if (rememberPass.isChecked()) {
-                        Log.i("TAG", "开始保存密码");
-                        editor.putString("account", uname);
-                        editor.putString("password", upassword);
-                        editor.putBoolean("remember_password", true);
-                    } else {
-                        editor.clear();
-                    }
-                    editor.commit();
 
-                    boolean isRemember = pref.getBoolean("remember_password",false);
-                    if(isRemember) {
-                        //将账号和密码都设置到文本框中
-                        String account = pref.getString("account","");
-                        String password = pref.getString("password","");
-                        et_uname.setText(account);
-                        et_password.setText(password);
-                        rememberPass.setChecked(true);
-                    }
+
+
 
                     if (flag == 200) {
                         editor = getSharedPreferences("data", MODE_PRIVATE).edit();
                         editor.putString("token", token);
+                        editor.putString("uname",uname);
+                        editor.putString("upassword",upassword);
                         editor.commit();
                         Log.i(TAG, "登录中成功存储token==" + token);
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toast.makeText(user_login.this, "登录成功！", Toast.LENGTH_SHORT).show();
                                 dismiss(progressDialog);
-                                Intent intent = new Intent(user_login.this, MainActivity.class);
-                                startActivity(intent);
                             }
                         });
+                        Intent intent = new Intent(user_login.this, MainActivity.class);
+                        intent.putExtra("extra","登录成功");
+                        startActivity(intent);
                     }
 
-<<<<<<< HEAD
-=======
+
+
 //                    //记住密码
 //                    if(rememberPass.isChecked()){//检查复选框是否被选中
 //                        editor.putBoolean("remember_password",true);
@@ -234,7 +230,7 @@ public class user_login extends AppCompatActivity {
 //                    }
 //                    editor.commit();
                     
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
                     if (flag == 20001) {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -258,6 +254,10 @@ public class user_login extends AppCompatActivity {
                 }
             }
         });
+
+        Intent intent = new Intent(user_login.this, MainActivity.class);
+        intent.putExtra("extra","登录成功");
+        startActivity(intent);
 
     }
 

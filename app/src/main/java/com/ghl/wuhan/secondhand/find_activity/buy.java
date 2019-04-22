@@ -33,12 +33,12 @@ public class buy extends AppCompatActivity {
     private Button btn_submit;
     private String token;
     private int opType = 90004;
-<<<<<<< HEAD
+
     private Dialog progressDialog;
 
-=======
+
     private SwipeRefreshLayout swipeRefresh;
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
 
 
     //查询列表中的属性
@@ -54,12 +54,12 @@ public class buy extends AppCompatActivity {
         //初始化部分
 //        lv_showGoods = (ListView) findViewById(R.id.lv_showGoods);
             recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
-<<<<<<< HEAD
 
-=======
+
+
         //下拉刷新
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
 
         iv_back = (ImageView) findViewById(R.id.iv_back);
         btn_submit = (Button) findViewById(R.id.btn_submit);
@@ -173,26 +173,26 @@ public class buy extends AppCompatActivity {
                         @Override
                         public void run() {
                             if (flag == 200) {
-<<<<<<< HEAD
+
                                 //                                ArrayAdapter<Goods> adapter = new GoodsAdapter(buy.this, R.layout.goods_item, resultGoodsList);
                                 //                                lv_showGoods.setAdapter(adapter);
 
-=======
+
 //                                ArrayAdapter<Goods> adapter = new GoodsAdapter(buy.this, R.layout.goods_item, resultGoodsList);
 //                                lv_showGoods.setAdapter(adapter);
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
                                 LinearLayoutManager layoutManager = new LinearLayoutManager(buy.this);
                                 recyclerView.setLayoutManager(layoutManager);
                                 Goods_Adapter adapter = new Goods_Adapter(resultGoodsList);
                                 recyclerView.setAdapter(adapter);
-<<<<<<< HEAD
+
                                 dismiss(progressDialog);
 
-=======
+
 
                                 adapter.notifyDataSetChanged();
                                 swipeRefresh.setRefreshing(false);
->>>>>>> 3cac62ea6001e3fbc90cc548242e9230b7a32e0a
+
                             }
                         }
                     });
