@@ -28,6 +28,9 @@ public class Goods {
     private int opType;     //操作类型（发布，维护等）
     private int sex;
 
+    private int currentPages;//当前页
+    private int datums;//数据条数
+
 
     public byte[] getGoodsImg() {
         return goodsImg;
@@ -125,11 +128,26 @@ public class Goods {
         this.userid = userid;
     }
 
+    public int getCurrentPages() {
+        return currentPages;
+    }
+
+    public void setCurrentPages(int currentPages) {
+        this.currentPages = currentPages;
+    }
+
+    public int getDatums() {
+        return datums;
+    }
+
+    public void setDatums(int datums) {
+        this.datums = datums;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
-                "opType=" + opType +
-                ", goodsID='" + goodsID + '\'' +
+                "goodsID='" + goodsID + '\'' +
                 ", goodsType='" + goodsType + '\'' +
                 ", goodsName='" + goodsName + '\'' +
                 ", price=" + price +
@@ -137,12 +155,12 @@ public class Goods {
                 ", quality=" + quality +
                 ", userid='" + userid + '\'' +
                 ", goodsImg=" + Arrays.toString(goodsImg) +
-//                ", uname='" + uname + '\'' +
-//                ", uphone='" + uphone + '\'' +
-                ", sex=" + sex +
-             //   ", qq='" + qq + '\'' +
-              //  ", weixin='" + weixin + '\'' +
                 ", token='" + token + '\'' +
+                ", goodsTypeName='" + goodsTypeName + '\'' +
+                ", opType=" + opType +
+                ", sex=" + sex +
+                ", currentPages=" + currentPages +
+                ", datums=" + datums +
                 '}';
     }
 }

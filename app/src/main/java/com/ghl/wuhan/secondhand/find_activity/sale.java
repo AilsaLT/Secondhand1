@@ -192,7 +192,6 @@ public class sale extends TakePhotoActivity {
         String userJsonStr = gson.toJson(userBO, SaleBO.class);
         Log.i(TAG, "jsonStr is :" + userJsonStr);
         String url = "http://118.89.217.225:8080/Proj20/sale";
-//        sendRequest(url, userJsonStr);
         HttpUtil.sendOkHttpRequest(url,userJsonStr, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

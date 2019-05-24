@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/beijing"
+    android:background="@drawable/beijing1"
     android:orientation="vertical"
     tools:context="com.ghl.wuhan.secondhand.me_activity.user_login">
 
@@ -13,14 +13,14 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/fanhui1"
-            android:clickable="true"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_back"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@drawable/fanhui1"-->
+            <!--android:clickable="true"/>-->
 
         <TextView
             android:layout_width="wrap_content"

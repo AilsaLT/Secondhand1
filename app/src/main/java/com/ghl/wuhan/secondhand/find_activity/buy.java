@@ -3,18 +3,18 @@ package com.ghl.wuhan.secondhand.find_activity;
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.ghl.wuhan.secondhand.DialogUIUtils;
 import com.ghl.wuhan.secondhand.HttpUtil;
 import com.ghl.wuhan.secondhand.R;
+import com.ghl.wuhan.secondhand.dialog.DialogUIUtils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
-import static com.ghl.wuhan.secondhand.DialogUIUtils.dismiss;
+import static com.ghl.wuhan.secondhand.dialog.DialogUIUtils.dismiss;
 
 public class buy extends AppCompatActivity {
    //属性定义
@@ -35,9 +35,20 @@ public class buy extends AppCompatActivity {
     private int opType = 90004;
 
     private Dialog progressDialog;
+    /*
+    *向后台传页数，数据条数
+    * @parameter
+    * currentPages:页数
+    * datums:数据条数
+    * */
+    private int currentPages,datums = 5;
 
 
-    private SwipeRefreshLayout swipeRefresh;
+
+//   private SwipeRefreshLayout mSwipeRefreshLayout;
+//   private List<String> mDatas = new ArrayList<>();
+//    private RefreshAdapter mRefreshAdapter;
+//    private LinearLayoutManager mLinearLayoutManager;
 
 
 
@@ -49,20 +60,22 @@ public class buy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_buy);
 
         //初始化部分
 //        lv_showGoods = (ListView) findViewById(R.id.lv_showGoods);
-            recyclerView = (RecyclerView)findViewById(R.id.recycle_view);
-
-
-
+            recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
         //下拉刷新
-        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-
-
+//        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         btn_submit = (Button) findViewById(R.id.btn_submit);
+
+        //刷新
+//        ButterKnife.bind(this);
+//        initView();
+//        initData();
+//        initListener();
 
         //取消求购
         iv_back.setOnClickListener(new View.OnClickListener() {
@@ -90,59 +103,30 @@ public class buy extends AppCompatActivity {
                         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
                         String token = preferences.getString("token", "");
                         Log.i(TAG, "从sp获取到的token==" + token);
-                        purchase(token, opType);
+                        purchase(token, opType,currentPages,datums);
                     }
                 }).start();
             }
         });
-        //下拉刷新
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreFruit();
-            }
-        });
+
 
 
 
     }
-    private void refreFruit() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(buy.this);
-                        recyclerView.setLayoutManager(layoutManager);
-                        Goods_Adapter adapter = new Goods_Adapter(resultGoodsList);
-                        recyclerView.setAdapter(adapter);
-
-                        adapter.notifyDataSetChanged();
-                        swipeRefresh.setRefreshing(false);
-                    }
-                });
-            }
-        }).start();
-    }
     //将对象转换成json串
-    private void purchase(String token, int opType) {
+    private void purchase(String token, int opType,int currentPages,int datums) {
         Goods goods = new Goods();
         goods.setToken(token);
         goods.setOpType(opType);
+        goods.setCurrentPages(currentPages);
+        goods.setDatums(datums);
 
         //将获取的对象转换成Json串
         Gson gson = new Gson();
         String buyJsonStr = gson.toJson(goods, Goods.class);
         Log.i(TAG, "查询商品中buyJsonStr is :" + buyJsonStr);
         String url = "http://118.89.217.225:8080/Proj20/buy";
-//        sendRequest(url, buyJsonStr);
         HttpUtil.sendOkHttpRequest(url,buyJsonStr, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -189,10 +173,6 @@ public class buy extends AppCompatActivity {
                                 dismiss(progressDialog);
 
 
-
-                                adapter.notifyDataSetChanged();
-                                swipeRefresh.setRefreshing(false);
-
                             }
                         }
                     });
@@ -202,5 +182,43 @@ public class buy extends AppCompatActivity {
 
 
     }
+//    //刷新
+//    private void initView() {
+//
+//        mSwipeRefreshLayout.setColorSchemeColors(Color.RED,Color.BLUE,Color.GREEN);
+//    }
+//    private void initData() {
+//
+//        for (int i = 0; i < 10; i++) {
+//
+//            mDatas.add(" Item "+i);
+//        }
+//
+//        initRecylerView();
+//    }
+//    private void initRecylerView() {
+//
+//        mRefreshAdapter = new RefreshAdapter(this,mDatas);
+//        mLinearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+//
+//
+//
+//        //添加动画
+//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//
+//        //添加分割线
+//        mRecyclerView.addItemDecoration(new RefreshItemDecoration(this,RefreshItemDecoration.VERTICAL_LIST));
+//
+//        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+//        mRecyclerView.setAdapter(mRefreshAdapter);
+//    }
+//    private void initListener() {
+//
+//        initPullRefresh();
+//
+//        initLoadMoreListener();
+//
+//    }
+
 
 }

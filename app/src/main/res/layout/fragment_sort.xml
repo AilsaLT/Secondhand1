@@ -50,7 +50,7 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#f304fcbe"
+                    android:background="#f3e3e4e4"
                     android:clickable="true">
                     <View
                         android:id="@+id/v10"
@@ -72,6 +72,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
                         android:text="数码"
+                        android:textStyle="italic"
                         android:textColor="#000"
                         android:textSize="18sp"/>
                 </RelativeLayout>
@@ -83,13 +84,16 @@
                     android:background="#fff"/>
 
 
+
+
                 <RelativeLayout
                     android:id="@+id/rl_clothes"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.97"
-                    android:background="#d80df7"
+                    android:layout_weight="1"
+                    android:background="#f3e3e4e4"
                     android:clickable="true">
+
                     <View
                         android:id="@+id/v11"
                         android:layout_width="200dp"
@@ -111,7 +115,9 @@
                         android:layout_marginTop="5dp"
                         android:text="衣服"
                         android:textColor="#000"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:textStyle="italic"
+                        android:typeface="monospace"/>
 
 
                 </RelativeLayout>
@@ -120,7 +126,6 @@
                     android:layout_width="3dp"
                     android:layout_height="173dp"
                     android:background="#fff"/>
-
             </LinearLayout>
 
             <LinearLayout
@@ -139,8 +144,9 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#0fc5f2"
+                    android:background="#f3e3e4e4"
                     android:clickable="true">
+
                     <View
                         android:id="@+id/v12"
                         android:layout_width="200dp"
@@ -162,7 +168,8 @@
                         android:layout_marginTop="5dp"
                         android:text="日常用品"
                         android:textColor="#000"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:textStyle="italic"/>
                 </RelativeLayout>
 
                 <View
@@ -171,13 +178,15 @@
                     android:layout_height="173dp"
                     android:layout_toRightOf="@+id/rl_richang"
                     android:background="#fff"/>
+
                 <RelativeLayout
                     android:id="@+id/rl_sports_goods"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#97f790"
+                    android:background="#f3e3e4e4"
                     android:clickable="true">
+
                     <View
                         android:id="@+id/v13"
                         android:layout_width="200dp"
@@ -189,7 +198,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/numerical"/>
+                        android:background="@drawable/tiyu"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -199,10 +208,12 @@
                         android:layout_marginTop="5dp"
                         android:text="体育用品"
                         android:textColor="#000"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp"
+                        android:textStyle="italic"/>
 
 
                 </RelativeLayout>
+
                 <View
                     android:id="@+id/v8"
                     android:layout_width="3dp"
@@ -227,7 +238,7 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#f8fc02"
+                    android:background="#f3e3e4e4"
                     android:clickable="true">
                     <View
                         android:id="@+id/v14"
@@ -255,6 +266,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
                         android:text="电器"
+                        android:textStyle="italic"
                         android:textColor="#000"
                         android:textSize="18sp"/>
 
@@ -272,7 +284,7 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#f96ef6"
+                    android:background="#f3e3e4e4"
                     android:clickable="true">
                     <View
                         android:id="@+id/v15"
@@ -290,8 +302,9 @@
                         android:id="@+id/img_books"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/books"/>
+                        android:background="@drawable/books"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -300,6 +313,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="5dp"
                         android:text="书籍"
+                        android:textStyle="italic"
                         android:textColor="#000"
                         android:textSize="18sp"/>
 

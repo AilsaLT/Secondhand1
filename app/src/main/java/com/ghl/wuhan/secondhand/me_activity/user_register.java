@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.ghl.wuhan.secondhand.DialogUIUtils;
+import com.ghl.wuhan.secondhand.dialog.DialogUIUtils;
 import com.ghl.wuhan.secondhand.HttpUtil;
 import com.ghl.wuhan.secondhand.R;
 import com.google.gson.Gson;
@@ -34,7 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Response;
 
-import static com.ghl.wuhan.secondhand.DialogUIUtils.dismiss;
+import static com.ghl.wuhan.secondhand.dialog.DialogUIUtils.dismiss;
 
 public class user_register extends TakePhotoActivity {
     //属性定义

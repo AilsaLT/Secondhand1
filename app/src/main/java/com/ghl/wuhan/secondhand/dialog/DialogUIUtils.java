@@ -1,4 +1,4 @@
-package com.ghl.wuhan.secondhand;
+package com.ghl.wuhan.secondhand.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

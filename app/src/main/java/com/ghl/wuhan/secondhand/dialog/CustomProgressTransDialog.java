@@ -1,4 +1,4 @@
-package com.ghl.wuhan.secondhand;
+package com.ghl.wuhan.secondhand.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ghl.wuhan.secondhand.R;
 
 
 /**
