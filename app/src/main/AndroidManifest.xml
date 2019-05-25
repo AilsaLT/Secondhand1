@@ -44,6 +44,8 @@
         </activity>
         <activity android:name=".me_activity.user_set">
         </activity>
+        <activity android:name=".me_activity.user_query">
+        </activity>
     </application>
 
 </manifest>

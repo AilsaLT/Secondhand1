@@ -64,6 +64,35 @@
             android:textSize="20sp"/>
 
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_deng1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="#fff"
+        android:clickable="true">
+        <ImageView
+            android:id="@+id/iv_deng1"
+            android:clickable="true"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/denglu"/>
+        <TextView
+            android:id="@+id/tv_deng1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="okk"
+            android:textColor="#b6adad"
+            android:layout_toRightOf="@+id/iv_deng1"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:id="@+id/rl_deng1"
@@ -260,6 +289,7 @@
         android:background="#eae7e7">
     </View>
     <RelativeLayout
+        android:id="@+id/rl_set"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
