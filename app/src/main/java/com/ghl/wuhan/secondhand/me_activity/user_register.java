@@ -217,7 +217,7 @@ public class user_register extends TakePhotoActivity {
     }
 
     //将对象转换成json串
-    private void register(int opType, String uname, String upassword, byte[] uimages, String uphone, int sex) {
+    private void register(int opType, final String uname, String upassword, byte[] uimages, String uphone, int sex) {
 
         UserBO userBO = new UserBO();
         String uuid = UUID.randomUUID().toString();
@@ -257,6 +257,12 @@ public class user_register extends TakePhotoActivity {
                     int flag = userVO.getFlag();
 
                     if (flag == 200) {
+
+                        //注册成功后将用户名存储起来
+                        editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                        editor.putString("uname",uname);
+                        editor.commit();
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

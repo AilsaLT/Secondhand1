@@ -1,6 +1,7 @@
 package com.ghl.wuhan.secondhand;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -9,17 +10,19 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ghl.wuhan.secondhand.Fragment.Find;
 import com.ghl.wuhan.secondhand.Fragment.Home;
 import com.ghl.wuhan.secondhand.Fragment.Me;
 import com.ghl.wuhan.secondhand.Fragment.Sort;
+
+import static android.text.TextUtils.isEmpty;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,14 +38,20 @@ public class MainActivity extends AppCompatActivity {
     private Me me;
     private Fragment[] fragments;
     private int lastfragment;//用于记录上个选择的Fragment
+    private RelativeLayout rl_deng,rl_deng1;
+    private TextView tv_deng1;
+    private SharedPreferences pref;
+
 
     //初始化fragment和fragment数组
     private void initFragment() {
 
         Intent intent = getIntent();
         String extra = intent.getStringExtra("extra");
-        Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();//该类用作携带数据
         bundle.putString("extra",extra);
+        Log.i(TAG,"main中的extra："+extra);
+
 
         home = new Home();
         sort = new Sort();
@@ -147,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         // 初始化用这个方法
         initFragment();
 
+
     }
 
 
@@ -155,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         String tag = intent.getStringExtra("EXIT_TAG");
-        if (tag != null&& !TextUtils.isEmpty(tag)) {
+        if (tag != null&& !isEmpty(tag)) {
             if ("SINGLETASK".equals(tag)) {//退出程序
                 finish();
             }
