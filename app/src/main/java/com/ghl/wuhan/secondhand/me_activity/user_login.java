@@ -25,7 +25,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 import static com.ghl.wuhan.secondhand.dialog.DialogUIUtils.dismiss;
-/*提交*/
+/*继续提交*/
 public class user_login extends AppCompatActivity {
     private String TAG = "TAG";
     private final int opType = 90002;
