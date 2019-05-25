@@ -126,7 +126,7 @@ public class buy extends AppCompatActivity {
         Gson gson = new Gson();
         String buyJsonStr = gson.toJson(goods, Goods.class);
         Log.i(TAG, "查询商品中buyJsonStr is :" + buyJsonStr);
-        String url = "http://118.89.217.225:8080/Proj20/buy";
+        String url = "http://47.105.183.54:8080/Proj20/buy";
         HttpUtil.sendOkHttpRequest(url,buyJsonStr, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

@@ -1,138 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#f4f4f5">
-
-        <ImageView
-            android:id="@+id/back_login"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/fanhui1"
-            android:clickable="true"
-            android:layout_centerVertical="true"/>
-
-        <TextView
-            android:id="@+id/back"
-            android:clickable="true"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/back_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="返回"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"/>
-
-        <TextView
-            android:id="@+id/view0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="设置"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
+    android:orientation="vertical"
+    android:background="#f2f0f0"
+    tools:context="com.ghl.wuhan.secondhand.me_activity.user_login">
 
     <TextView
-        android:id="@+id/safety"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="        账号与安全"
-        android:clickable="true"
-        android:layout_below="@+id/title"
-        android:textColor="#000"
+        android:text="设置"
         android:textSize="20sp"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
-        android:background="#fff"/>
-
-
+        android:textColor="#000"
+        android:gravity="center_horizontal"
+        android:clickable="true"
+        android:background="#f2efef"/>
     <TextView
-        android:id="@+id/message"
-        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/safety"
-        android:layout_marginTop="10dp"
-        android:text="         消息通知"
-        android:textColor="#000"
+        android:text="      账号安全"
         android:textSize="20sp"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
+        android:textColor="#000"
+        android:clickable="true"
         android:background="#fff"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </View>
     <TextView
-        android:id="@+id/yinsi"
-        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/safety"
-        android:layout_marginTop="10dp"
-        android:text="         隐私"
-        android:textColor="#000"
+        android:text="      隐私"
         android:textSize="20sp"
-        android:layout_centerVertical="true"
-        android:gravity="center_vertical"
+        android:textColor="#000"
+        android:clickable="true"
         android:background="#fff"/>
-    <!--<TextView-->
-        <!--android:id="@+id/tongyong"-->
-        <!--android:clickable="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_below="@+id/safety"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:text="         通用"-->
-        <!--android:textColor="#000"-->
-        <!--android:textSize="20sp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:background="#fff"/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/gongneng"-->
-        <!--android:clickable="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_below="@+id/safety"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:text="         关于市场APP与帮助"-->
-        <!--android:textColor="#000"-->
-        <!--android:textSize="20sp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:background="#fff"/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/bangzu"-->
-        <!--android:clickable="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_below="@+id/safety"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:text="         退出登录"-->
-        <!--android:textColor="#000"-->
-        <!--android:textSize="20sp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:background="#fff"/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/login_out"-->
-        <!--android:clickable="true"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_below="@+id/safety"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:text="         退出登录"-->
-        <!--android:textColor="#000"-->
-        <!--android:textSize="20sp"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:gravity="center_vertical"-->
-        <!--android:background="#fff"/>-->
-
-</RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="      消息通知声音"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:clickable="true"
+        android:background="#fff"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+    </View>
+    <TextView
+        android:id="@+id/login_out"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="      退出登录"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:clickable="true"
+        android:background="#fff"/>
+</LinearLayout>

@@ -74,7 +74,7 @@
 
         <EditText
             android:id="@+id/et_uname"
-            android:layout_width="300dp"
+            android:layout_width="330dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
@@ -91,13 +91,12 @@
 
         <EditText
             android:id="@+id/et_password"
-            android:layout_width="300dp"
+            android:layout_width="330dp"
             android:layout_height="40dp"
             android:inputType="textPassword"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
-            android:hint="请输入密码"
-            android:digits="@string/filterPwd"
+            android:hint="密码为6-16位数字字母混合,首位不能为数字"
             android:textSize="15dp"/>
 
 
@@ -110,7 +109,7 @@
 
         <EditText
             android:id="@+id/et_qr"
-            android:layout_width="300dp"
+            android:layout_width="330dp"
             android:layout_height="40dp"
             android:inputType="textPassword"
             android:layout_alignParentBottom="true"

@@ -128,7 +128,13 @@ public class user_login extends AppCompatActivity {
                         editor.putString("password", upassword);
                         editor.putBoolean("remember_password", true);
                     } else {
+                        //SharedPreferences.Editor.clear()方法是把之前commit后保存的所有信息全部进行清空
                         editor.clear();
+                        editor.putBoolean("remember_password", false);
+                        editor.putBoolean("login",true);
+                        editor.putString("uname",uname);
+
+
                     }
                     editor.commit();
 
@@ -143,13 +149,6 @@ public class user_login extends AppCompatActivity {
             }
         });
 
-//        //取消登录
-//        iv_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
     }
 
     //将对象转换成json串
@@ -167,7 +166,7 @@ public class user_login extends AppCompatActivity {
         String userJsonStr = gson.toJson(userBO, UserBO.class);
         Log.i(TAG, "登录中loginJsonStr is :" + userJsonStr);
 
-        String url = "http://118.89.217.225:8080/Proj20/login";
+        String url = "http://47.105.183.54:8080/Proj20/login";
         //        sendRequest(url, userJsonStr);
         HttpUtil.sendOkHttpRequest(url, userJsonStr, new okhttp3.Callback() {
             @Override
@@ -204,7 +203,6 @@ public class user_login extends AppCompatActivity {
 
 
                     if (flag == 200) {
-
                         //如果登录成功则为true
                         login = true;
 
@@ -213,8 +211,11 @@ public class user_login extends AppCompatActivity {
                         editor.putString("uname",uname);
                         editor.putString("upassword",upassword);
                         editor.putBoolean("login",login);
+
                         editor.commit();
                         Log.i(TAG, "登录中成功存储token==" + token);
+//                        boolean l = pref.getBoolean("login",false);
+//                        Log.i(TAG,"user_login中login为"+l);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -227,6 +228,8 @@ public class user_login extends AppCompatActivity {
                         Intent intent = new Intent(user_login.this, MainActivity.class);
                         intent.putExtra("extra","登录成功");
                         startActivity(intent);
+
+
                     }
 
 
@@ -238,11 +241,21 @@ public class user_login extends AppCompatActivity {
                         editor.putString("upassword",upassword);
                     }else{
                         editor.clear();
+                        editor.putBoolean("login",true);
+                        editor.putString("uname",uname);
+
                     }
                     editor.commit();
                     finish();
 
                     if (flag == 20001) {
+                        //没有登录成功，则把login == false:做这部处理的原因主要是因为，如果不点击记住密码SP中存储的信息都会被
+                        //editor.clear();清空
+                        login = false;
+                        editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                        editor.putBoolean("login",login);
+                        editor.commit();
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -253,6 +266,13 @@ public class user_login extends AppCompatActivity {
 
                     }
                     if (flag == 20002) {
+
+                        //没有登录成功，则把login == false:做这部处理的原因主要是因为，如果不点击记住密码SP中存储的信息都会被
+                        //editor.clear();清空
+                        login = false;
+                        editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                        editor.putBoolean("login",login);
+                        editor.commit();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

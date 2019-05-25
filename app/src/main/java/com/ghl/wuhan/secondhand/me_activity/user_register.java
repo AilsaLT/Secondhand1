@@ -17,9 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.ghl.wuhan.secondhand.dialog.DialogUIUtils;
 import com.ghl.wuhan.secondhand.HttpUtil;
 import com.ghl.wuhan.secondhand.R;
+import com.ghl.wuhan.secondhand.dialog.DialogUIUtils;
 import com.google.gson.Gson;
 
 import org.devio.takephoto.app.TakePhotoActivity;
@@ -29,6 +29,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
@@ -106,12 +108,21 @@ public class user_register extends TakePhotoActivity {
                 final String uqr = et_qr.getText().toString().trim();
                 Log.i(TAG, "uname is :" + uname);
                 Log.i(TAG, "upassword is :" + upassword);
+                //6-16位数字字母混合,不能全为数字,不能全为字母,首位不能为数字
+
+                String regex="^(?![0-9])(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";//密码格式验证(正则)
+                Pattern p= Pattern.compile(regex);
+                Matcher m=p.matcher(upassword);
+                boolean isMatch=m.matches();
+
                 if(uname.isEmpty()&&upassword.isEmpty()&&uqr.isEmpty()){
                     Toast.makeText(user_register.this,"请输入注册信息",Toast.LENGTH_SHORT).show();
                 }else if(uname.isEmpty()){
                     Toast.makeText(user_register.this,"用户名不能为空",Toast.LENGTH_SHORT).show();
                 }else if(upassword.isEmpty()){
                     Toast.makeText(user_register.this,"密码不能为空",Toast.LENGTH_SHORT).show();
+                }else if(isMatch    ==  false){
+                    Toast.makeText(user_register.this,"密码格式不对，6-16位数字字母混合,不能全为数字,不能全为字母,首位不能为数字",Toast.LENGTH_LONG).show();
                 }else if(uqr.isEmpty()){
                     Toast.makeText(user_register.this,"请再次确认密码",Toast.LENGTH_SHORT).show();
                 }else if(upassword.equals(uqr)==false){
@@ -120,6 +131,10 @@ public class user_register extends TakePhotoActivity {
                     //进度条的设置
                    progressDialog = DialogUIUtils.showLoadingDialog(user_register.this,"正在注册......");
                     progressDialog.show();
+                    //点击物理返回键是否可取消dialog
+                    progressDialog.setCancelable(true);
+                    //点击dialog之外 是否可取消
+                    progressDialog.setCanceledOnTouchOutside(false);
                     //bitmap转byte[]
                     Resources res = getResources();
                     Bitmap bmp = BitmapFactory.decodeResource(res, R.drawable.bt);
@@ -219,7 +234,7 @@ public class user_register extends TakePhotoActivity {
         Log.i(TAG, "userJsonStr :" + userJsonStr);
 
 
-        String url = "http://118.89.217.225:8080/Proj20/register";
+        String url = "http://47.105.183.54:8080/Proj20/register";
         HttpUtil.sendOkHttpRequest(url, userJsonStr, new okhttp3.Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -253,6 +268,7 @@ public class user_register extends TakePhotoActivity {
 
                         Intent intent = new Intent(user_register.this, user_login.class);
                         startActivity(intent);
+                        finish();
 
                     }
                     if (flag == 10002)

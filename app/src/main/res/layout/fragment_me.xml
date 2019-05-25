@@ -72,25 +72,27 @@
         android:layout_weight="2"
         android:background="#fff"
         android:clickable="true">
+
         <ImageView
             android:id="@+id/iv_deng1"
-            android:clickable="true"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/denglu"/>
+            android:background="@drawable/denglu"
+            android:clickable="true"/>
+
         <TextView
             android:id="@+id/tv_deng1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="okk"
-            android:textSize="20sp"
-            android:textColor="#b6adad"
-
+            android:layout_centerVertical="true"
             android:layout_marginLeft="50dp"
-            android:layout_centerVertical="true"/>
+            android:text="okk"
+
+            android:textColor="#b6adad"
+            android:textSize="20sp"/>
 
     </RelativeLayout>
     <!--<View-->
